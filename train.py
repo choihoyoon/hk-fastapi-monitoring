@@ -38,6 +38,7 @@ def train():
     X_test = scaler.transform(X_test)
     # model = HistGradientBoostingRegressor(max_iter=50).fit(X_train, y_train)
     model = RandomForestRegressor(max_depth=30).fit(X_train, y_train)
+    
 
     y_pred = model.predict(X_test)
     error = mean_squared_error(y_test, y_pred)
