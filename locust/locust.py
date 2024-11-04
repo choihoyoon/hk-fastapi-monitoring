@@ -26,13 +26,19 @@ dataset = (
 )
 
 # 스트레스 테스트 시나리오
+# - health check
+# - predict
+#   - 성공 케이스
+#   - 실패 케이스
 class WinePredictionUser(HttpUser):
+    # @task 어노테이션을 이용하여 테스트 루틴 작성
     @task(1)
     def healthcheck(self):
         self.client.get("/healthcheck")
 
     @task(10)
     def prediction(self):
+        # 랜덤하게 데이터 뽑기
         record = random.choice(dataset).copy()
         self.client.post("/predict", json=record)
 
